@@ -2,6 +2,8 @@ import { and, asc, desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { farmZones, plantings, seedInventory } from "@/db/schema";
 
+export const runtime = "nodejs";
+
 const seedStatuses = ["in_stock", "low_stock", "out_of_stock", "discontinued"] as const;
 const plantingStatuses = ["planned", "seeded", "transplanted", "growing", "ready_to_harvest", "harvesting", "finished", "removed"] as const;
 const plantingMethods = ["direct_seed", "transplanted", "existing", "unknown"] as const;
