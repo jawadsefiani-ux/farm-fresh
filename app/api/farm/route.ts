@@ -1,6 +1,6 @@
-import { and, asc, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, isNull } from "drizzle-orm";
 import { db } from "@/db";
-import { farmZones, plantings, seedInventory } from "@/db/schema";
+import { cropCatalog, farmZones, plantings, seedInventory } from "@/db/schema";
 
 export const runtime = "nodejs";
 
@@ -52,7 +52,9 @@ export async function POST(request: Request) {
     if (areaUsedPercent === undefined) return Response.json({ error: "Area used must be between 1% and 100%." }, { status: 400 });
     const [farmZone] = await db.select({ id: farmZones.id }).from(farmZones).where(and(eq(farmZones.code, zone), eq(farmZones.active, true)));
     if (!farmZone) return Response.json({ error: "Unknown farm zone." }, { status: 400 });
-    const values = { zoneId: farmZone.id, cropName: optionalText(data.crop)!, variety: optionalText(data.variety), cropFamily: optionalText(data.family), plantingDate: dateValue(data.date), plantingDatePrecision: data.precision, plantingMethod: data.method, status: data.status, areaUsedPercent, perennial: data.perennial === true, notes: optionalText(data.notes), updatedAt: new Date() };
+    const cropName = optionalText(data.crop)!; const variety = optionalText(data.variety);
+    const matches = await db.select({ id: cropCatalog.id }).from(cropCatalog).where(and(eq(cropCatalog.cropName, cropName), variety ? eq(cropCatalog.variety, variety) : isNull(cropCatalog.variety)));
+    const values = { zoneId: farmZone.id, cropName, variety, cropFamily: optionalText(data.family), cropCatalogId: matches[0]?.id ?? null, plantingDate: dateValue(data.date), plantingDatePrecision: data.precision, plantingMethod: data.method, status: data.status, areaUsedPercent, perennial: data.perennial === true, notes: optionalText(data.notes), updatedAt: new Date() };
     if (body.action === "createPlanting") await db.insert(plantings).values(values);
     else if (typeof data.id === "string") await db.update(plantings).set(values).where(eq(plantings.id, data.id));
     else return Response.json({ error: "Invalid planting." }, { status: 400 });

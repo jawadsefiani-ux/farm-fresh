@@ -15,6 +15,13 @@
       "when": 1788521571079,
       "tag": "0001_add_fl11",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788521580000,
+      "tag": "0002_crop_knowledge_foundation",
+      "breakpoints": true
     }
   ]
 }

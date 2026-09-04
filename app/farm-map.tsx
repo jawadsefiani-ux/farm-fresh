@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cropLabel, label } from "./display-labels";
 
 type Zone = { code: string; name: string; width: number; length: number };
 type Planting = { id: string; cropName: string; variety: string | null; cropFamily: string | null; zone: string; plantingDate: string | null; plantingDatePrecision: "exact" | "approximate" | "unknown"; plantingMethod: "direct_seed" | "transplanted" | "existing" | "unknown"; status: "planned" | "seeded" | "transplanted" | "growing" | "ready_to_harvest" | "harvesting" | "finished" | "removed"; areaUsedPercent: string | null; perennial: boolean; notes: string | null };
@@ -50,13 +51,13 @@ export function FarmMap({ zones, selected, occupied, onSelect }: FarmMapProps) {
   useEffect(() => {
     let cancelled = false;
     void fetch(manifestPath)
-      .then(async (response) => { if (!response.ok) throw new Error("Could not load the approved zone manifest."); return response.json() as Promise<ZoneManifest>; })
+      .then(async (response) => { if (!response.ok) throw new Error("Impossible de charger le plan de référence."); return response.json() as Promise<ZoneManifest>; })
       .then((data) => { if (!cancelled) setManifest(data); })
-      .catch((cause: unknown) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Could not load the approved zone manifest."); });
+      .catch((cause: unknown) => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Impossible de charger le plan de référence."); });
     return () => { cancelled = true; };
   }, []);
 
-  if (!manifest) return <div className="farm-map-loading">{error || "Loading approved farm map…"}</div>;
+  if (!manifest) return <div className="farm-map-loading">{error || "Chargement du plan de référence…"}</div>;
 
   const { image_width_px: imageWidth, image_height_px: imageHeight } = manifest.coordinate_system;
   const viewWidth = fittedBounds.width / camera.zoom;
@@ -112,18 +113,18 @@ export function FarmMap({ zones, selected, occupied, onSelect }: FarmMapProps) {
   const blockClickAfterDrag = (event: React.MouseEvent<SVGSVGElement>) => { if (movedRef.current) { event.preventDefault(); event.stopPropagation(); movedRef.current = false; } };
   const zoneCodes = new Set(zones.map((zone) => zone.code));
 
-  return <div className="farm-map-canvas" aria-label="Farm zone map">
-    <div className="map-surface-note"><span>Approved surveyed map</span><div className="map-controls" role="group" aria-label="Map controls"><button aria-label="Zoom out" onClick={() => setZoom(camera.zoom - .25)}>−</button><input aria-label="Map zoom" type="range" min={minZoom} max={maxZoom} step="0.1" value={camera.zoom} onChange={(event) => setZoom(Number(event.target.value))} /><button aria-label="Zoom in" onClick={() => setZoom(camera.zoom + .25)}>+</button><button className="fit-map" onClick={fit}>Fit</button></div></div>
+  return <div className="farm-map-canvas" aria-label="Plan des zones de la ferme">
+    <div className="map-surface-note"><span>Plan de référence</span><div className="map-controls" role="group" aria-label="Commandes du plan"><button aria-label="Zoom arrière" onClick={() => setZoom(camera.zoom - .25)}>−</button><input aria-label="Zoom du plan" type="range" min={minZoom} max={maxZoom} step="0.1" value={camera.zoom} onChange={(event) => setZoom(Number(event.target.value))} /><button aria-label="Zoom avant" onClick={() => setZoom(camera.zoom + .25)}>+</button><button className="fit-map" onClick={fit}>Recentrer</button></div></div>
     <div className={`farm-map-scroll ${dragging ? "is-dragging" : ""}`}>
       <svg ref={svgRef} className="farm-map-svg" viewBox={`${camera.centerX - viewWidth / 2} ${camera.centerY - viewHeight / 2} ${viewWidth} ${viewHeight}`} role="img" aria-label="Interactive farm map" preserveAspectRatio="xMidYMid meet" onWheel={onWheel} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerEnd} onPointerCancel={onPointerEnd} onClickCapture={blockClickAfterDrag}>
         <image href={scanPath} x="0" y="0" width={imageWidth} height={imageHeight} />
         {manifest.zones.filter((zone) => zoneCodes.has(zone.code)).map((zone) => <FarmZone key={zone.code} zone={zone} selected={selected === zone.code} occupied={occupied.has(zone.code)} onSelect={onSelect} />)}
       </svg>
     </div>
-    <p className="map-guidance">Drag to pan, use the wheel or slider to zoom, and choose Fit to return to the active top-plateau overview.</p>
+    <p className="map-guidance">Faites glisser pour déplacer le plan, utilisez la molette ou le curseur pour zoomer, puis Recentrer pour revenir à la vue d’ensemble.</p>
   </div>;
 }
 
 export function ZoneDetailsPanel({ zone, plantings, onAdd, onAddExisting, onEdit, onEnd, onClose }: { zone: Zone; plantings: Planting[]; onAdd: () => void; onAddExisting: () => void; onEdit: (planting: Planting) => void; onEnd: (id: string, status: "finished" | "removed") => void; onClose: () => void }) {
-  return <aside className="details zone-details-panel" aria-live="polite"><button className="zone-details-close" aria-label="Close zone details" onClick={onClose}>×</button><p className="eyebrow">ZONE DETAILS</p><h2>{zone.code}</h2><h3>{zone.name}</h3><div className="dimensions"><span><b>{zone.width} m</b> width</span><span><b>{zone.length} m</b> length</span><span><b>{zone.width * zone.length} m²</b> area</span></div><hr /><p className="eyebrow">CURRENT PLANTINGS</p>{plantings.length ? plantings.map((planting) => <div className="planting-mini" key={planting.id}><strong>{planting.cropName}{planting.variety ? ` · ${planting.variety}` : ""}</strong><span><span className={`pill ${planting.status}`}>{planting.status.replaceAll("_", " ")}</span> {planting.plantingDate ? `${planting.plantingDate}${planting.plantingDatePrecision === "approximate" ? " · Approximate" : ""}` : "Date unknown"}</span><small>{planting.areaUsedPercent ? `${planting.areaUsedPercent}% of zone` : "Area not recorded"}{planting.perennial ? " · Perennial" : ""}</small><div className="planting-mini-actions"><button onClick={() => onEdit(planting)}>Edit</button><button onClick={() => onEnd(planting.id, "finished")}>Finish</button><button onClick={() => onEnd(planting.id, "removed")}>Remove</button></div></div>) : <p className="muted">No current plantings recorded.</p>}<div className="zone-form-actions"><button className="primary full" onClick={onAdd}>+ Add planting</button><button className="outline full" onClick={onAddExisting}>+ Add existing</button></div><p className="history">Finished and removed plantings remain in the farm’s history.</p></aside>;
+  return <aside className="details zone-details-panel" aria-live="polite"><button className="zone-details-close" aria-label="Fermer les détails de la zone" onClick={onClose}>×</button><p className="eyebrow">DÉTAILS DE LA ZONE</p><h2>{zone.code}</h2><h3>{zone.name}</h3><div className="dimensions"><span><b>{zone.width} m</b> largeur</span><span><b>{zone.length} m</b> longueur</span><span><b>{zone.width * zone.length} m²</b> surface</span></div><hr /><p className="eyebrow">CULTURES EN COURS</p>{plantings.length ? plantings.map((planting) => <div className="planting-mini" key={planting.id}><strong>{cropLabel(planting.cropName)}{planting.variety ? ` · ${planting.variety}` : ""}</strong><span><span className={`pill ${planting.status}`}>{label(planting.status)}</span> {planting.plantingDate ? `${planting.plantingDate}${planting.plantingDatePrecision === "approximate" ? " · Approximative" : ""}` : "Date inconnue"}</span><small>{planting.areaUsedPercent ? `${planting.areaUsedPercent}% de la zone` : "Surface non renseignée"}{planting.perennial ? " · Vivace" : ""}</small><div className="planting-mini-actions"><button onClick={() => onEdit(planting)}>Modifier</button><button onClick={() => onEnd(planting.id, "finished")}>Terminer</button><button onClick={() => onEnd(planting.id, "removed")}>Retirer</button></div></div>) : <p className="muted">Aucune culture en cours enregistrée.</p>}<div className="zone-form-actions"><button className="primary full" onClick={onAdd}>+ Ajouter une culture</button><button className="outline full" onClick={onAddExisting}>+ Ajouter une culture existante</button></div><p className="history">Les cultures terminées ou retirées restent dans l’historique de la ferme.</p></aside>;
 }
