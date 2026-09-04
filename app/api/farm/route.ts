@@ -12,6 +12,11 @@ const datePrecisions = ["exact", "approximate", "unknown"] as const;
 const optionalText = (value: unknown) => typeof value === "string" && value.trim() ? value.trim() : null;
 const dateValue = (value: unknown) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : null;
 const inList = <T extends readonly string[]>(value: unknown, values: T): value is T[number] => typeof value === "string" && values.includes(value);
+const areaPercent = (value: unknown) => {
+  if (value === null || value === undefined || value === "") return null;
+  const parsed = typeof value === "number" ? value : Number(value);
+  return Number.isFinite(parsed) && parsed >= 1 && parsed <= 100 ? String(parsed) : undefined;
+};
 
 export async function GET() {
   const [zones, seeds, records] = await Promise.all([
@@ -21,7 +26,7 @@ export async function GET() {
       id: plantings.id, cropName: plantings.cropName, variety: plantings.variety, cropFamily: plantings.cropFamily,
       plantingDate: plantings.plantingDate, plantingDatePrecision: plantings.plantingDatePrecision,
       plantingMethod: plantings.plantingMethod, status: plantings.status, perennial: plantings.perennial,
-      notes: plantings.notes, zone: farmZones.code,
+      notes: plantings.notes, areaUsedPercent: plantings.areaUsedPercent, zone: farmZones.code,
     }).from(plantings).innerJoin(farmZones, eq(plantings.zoneId, farmZones.id)).orderBy(desc(plantings.createdAt)),
   ]);
   return Response.json({ zones, seeds, plantings: records });
@@ -43,9 +48,11 @@ export async function POST(request: Request) {
   } else if (body.action === "createPlanting" || body.action === "updatePlanting") {
     const zone = optionalText(data.zone);
     if (!optionalText(data.crop) || !zone || !inList(data.precision, datePrecisions) || !inList(data.method, plantingMethods) || !inList(data.status, plantingStatuses)) return Response.json({ error: "Invalid planting." }, { status: 400 });
+    const areaUsedPercent = areaPercent(data.areaUsedPercent);
+    if (areaUsedPercent === undefined) return Response.json({ error: "Area used must be between 1% and 100%." }, { status: 400 });
     const [farmZone] = await db.select({ id: farmZones.id }).from(farmZones).where(and(eq(farmZones.code, zone), eq(farmZones.active, true)));
     if (!farmZone) return Response.json({ error: "Unknown farm zone." }, { status: 400 });
-    const values = { zoneId: farmZone.id, cropName: optionalText(data.crop)!, variety: optionalText(data.variety), cropFamily: optionalText(data.family), plantingDate: dateValue(data.date), plantingDatePrecision: data.precision, plantingMethod: data.method, status: data.status, perennial: data.perennial === true, notes: optionalText(data.notes), updatedAt: new Date() };
+    const values = { zoneId: farmZone.id, cropName: optionalText(data.crop)!, variety: optionalText(data.variety), cropFamily: optionalText(data.family), plantingDate: dateValue(data.date), plantingDatePrecision: data.precision, plantingMethod: data.method, status: data.status, areaUsedPercent, perennial: data.perennial === true, notes: optionalText(data.notes), updatedAt: new Date() };
     if (body.action === "createPlanting") await db.insert(plantings).values(values);
     else if (typeof data.id === "string") await db.update(plantings).set(values).where(eq(plantings.id, data.id));
     else return Response.json({ error: "Invalid planting." }, { status: 400 });
