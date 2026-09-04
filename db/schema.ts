@@ -40,6 +40,10 @@ export const cropStages = pgTable("crop_stages", {
   id: uuid("id").defaultRandom().primaryKey(), cropCatalogId: uuid("crop_catalog_id").notNull().references(() => cropCatalog.id, { onDelete: "cascade" }), stageName: text("stage_name").notNull(), sortOrder: integer("sort_order").notNull(), startDayEstimate: integer("start_day_estimate"), endDayEstimate: integer("end_day_estimate"), expectedObservation: text("expected_observation"), recommendedAction: text("recommended_action"), notes: text("notes"), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => [index("crop_stages_catalog_sort_idx").on(table.cropCatalogId, table.sortOrder)]);
 
+export const farmTasks = pgTable("farm_tasks", {
+  id: uuid("id").defaultRandom().primaryKey(), plantingId: uuid("planting_id").references(() => plantings.id, { onDelete: "set null" }), zoneId: uuid("zone_id").references(() => farmZones.id, { onDelete: "set null" }), taskType: text("task_type").notNull(), title: text("title").notNull(), description: text("description").notNull(), priority: text("priority").notNull().default("normal"), dueDate: date("due_date"), source: text("source").notNull().default("generated"), fingerprint: text("fingerprint").notNull().unique(), status: text("status").notNull().default("pending"), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), completedAt: timestamp("completed_at", { withTimezone: true }),
+}, (table) => [index("farm_tasks_status_idx").on(table.status)]);
+
 export const plantings = pgTable("plantings", {
   id: uuid("id").defaultRandom().primaryKey(),
   zoneId: uuid("zone_id").notNull().references(() => farmZones.id, { onDelete: "restrict" }),

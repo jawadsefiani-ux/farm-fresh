@@ -29,6 +29,13 @@
       "when": 1788521581000,
       "tag": "0003_sidi_bettach_agronomy_baseline",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1788521582000,
+      "tag": "0004_weekly_farm_tasks",
+      "breakpoints": true
     }
   ]
 }
