@@ -1,0 +1,707 @@
+{
+  "source": "Approved Farm Fresh top-plateau scan",
+  "coordinate_system": {
+    "image_width_px": 1948,
+    "image_height_px": 830,
+    "origin": "top-left",
+    "note": "Overlay rectangles are aligned to the unchanged approved raster scan. normalized_rect values are fractions of the source image size."
+  },
+  "zone_count": 34,
+  "zones": [
+    {
+      "code": "RB1",
+      "type": "raised_bed",
+      "dimensions_m": {
+        "width": 3,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 556,
+        "y": 79,
+        "width": 47,
+        "height": 49
+      },
+      "normalized_rect": {
+        "x": 0.285421,
+        "y": 0.095181,
+        "width": 0.024127,
+        "height": 0.059036
+      }
+    },
+    {
+      "code": "RB2",
+      "type": "raised_bed",
+      "dimensions_m": {
+        "width": 3,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 613,
+        "y": 79,
+        "width": 45,
+        "height": 49
+      },
+      "normalized_rect": {
+        "x": 0.314682,
+        "y": 0.095181,
+        "width": 0.023101,
+        "height": 0.059036
+      }
+    },
+    {
+      "code": "RB3",
+      "type": "raised_bed",
+      "dimensions_m": {
+        "width": 3,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 556,
+        "y": 138,
+        "width": 47,
+        "height": 48
+      },
+      "normalized_rect": {
+        "x": 0.285421,
+        "y": 0.166265,
+        "width": 0.024127,
+        "height": 0.057831
+      }
+    },
+    {
+      "code": "RB4",
+      "type": "raised_bed",
+      "dimensions_m": {
+        "width": 3,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 613,
+        "y": 138,
+        "width": 45,
+        "height": 48
+      },
+      "normalized_rect": {
+        "x": 0.314682,
+        "y": 0.166265,
+        "width": 0.023101,
+        "height": 0.057831
+      }
+    },
+    {
+      "code": "NB1",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 669,
+        "y": 79,
+        "width": 20,
+        "height": 49
+      },
+      "normalized_rect": {
+        "x": 0.343429,
+        "y": 0.095181,
+        "width": 0.010267,
+        "height": 0.059036
+      }
+    },
+    {
+      "code": "NB2",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 699,
+        "y": 79,
+        "width": 18,
+        "height": 49
+      },
+      "normalized_rect": {
+        "x": 0.35883,
+        "y": 0.095181,
+        "width": 0.00924,
+        "height": 0.059036
+      }
+    },
+    {
+      "code": "NB3",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 727,
+        "y": 79,
+        "width": 19,
+        "height": 49
+      },
+      "normalized_rect": {
+        "x": 0.373203,
+        "y": 0.095181,
+        "width": 0.009754,
+        "height": 0.059036
+      }
+    },
+    {
+      "code": "NB4",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 756,
+        "y": 79,
+        "width": 19,
+        "height": 49
+      },
+      "normalized_rect": {
+        "x": 0.38809,
+        "y": 0.095181,
+        "width": 0.009754,
+        "height": 0.059036
+      }
+    },
+    {
+      "code": "NB5",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 669,
+        "y": 138,
+        "width": 20,
+        "height": 48
+      },
+      "normalized_rect": {
+        "x": 0.343429,
+        "y": 0.166265,
+        "width": 0.010267,
+        "height": 0.057831
+      }
+    },
+    {
+      "code": "NB6",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 699,
+        "y": 138,
+        "width": 18,
+        "height": 48
+      },
+      "normalized_rect": {
+        "x": 0.35883,
+        "y": 0.166265,
+        "width": 0.00924,
+        "height": 0.057831
+      }
+    },
+    {
+      "code": "NB7",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 727,
+        "y": 138,
+        "width": 19,
+        "height": 48
+      },
+      "normalized_rect": {
+        "x": 0.373203,
+        "y": 0.166265,
+        "width": 0.009754,
+        "height": 0.057831
+      }
+    },
+    {
+      "code": "NB8",
+      "type": "narrow_bed",
+      "dimensions_m": {
+        "width": 1,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 756,
+        "y": 138,
+        "width": 19,
+        "height": 48
+      },
+      "normalized_rect": {
+        "x": 0.38809,
+        "y": 0.166265,
+        "width": 0.009754,
+        "height": 0.057831
+      }
+    },
+    {
+      "code": "FR1",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 121,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.062115,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR2",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 193,
+        "y": 284,
+        "width": 73,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.099076,
+        "y": 0.342169,
+        "width": 0.037474,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR3",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 266,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.13655,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR4",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 338,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.173511,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR5",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 410,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.210472,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR6",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 482,
+        "y": 284,
+        "width": 74,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.247433,
+        "y": 0.342169,
+        "width": 0.037988,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR7",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 556,
+        "y": 284,
+        "width": 73,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.285421,
+        "y": 0.342169,
+        "width": 0.037474,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR8",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 629,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.322895,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR9",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 701,
+        "y": 284,
+        "width": 71,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.359856,
+        "y": 0.342169,
+        "width": 0.036448,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FR10",
+      "type": "front_plot_large",
+      "dimensions_m": {
+        "width": 8,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 772,
+        "y": 284,
+        "width": 118,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.396304,
+        "y": 0.342169,
+        "width": 0.060575,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL1",
+      "type": "front_plot_large",
+      "dimensions_m": {
+        "width": 8,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 947,
+        "y": 284,
+        "width": 115,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.48614,
+        "y": 0.342169,
+        "width": 0.059035,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL2",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1062,
+        "y": 284,
+        "width": 76,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.545175,
+        "y": 0.342169,
+        "width": 0.039014,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL3",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1138,
+        "y": 284,
+        "width": 71,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.584189,
+        "y": 0.342169,
+        "width": 0.036448,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL4",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1209,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.620637,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL5",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1281,
+        "y": 284,
+        "width": 73,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.657598,
+        "y": 0.342169,
+        "width": 0.037474,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL6",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1354,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.695072,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL7",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1426,
+        "y": 284,
+        "width": 72,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.732033,
+        "y": 0.342169,
+        "width": 0.036961,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL8",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1498,
+        "y": 284,
+        "width": 71,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.768994,
+        "y": 0.342169,
+        "width": 0.036448,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL9",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1569,
+        "y": 284,
+        "width": 74,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.805441,
+        "y": 0.342169,
+        "width": 0.037988,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL10",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1643,
+        "y": 284,
+        "width": 70,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.843429,
+        "y": 0.342169,
+        "width": 0.035934,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "FL11",
+      "type": "front_plot",
+      "dimensions_m": {
+        "width": 5,
+        "length": 3
+      },
+      "pixel_rect": {
+        "x": 1713,
+        "y": 284,
+        "width": 74,
+        "height": 44
+      },
+      "normalized_rect": {
+        "x": 0.879363,
+        "y": 0.342169,
+        "width": 0.037988,
+        "height": 0.053012
+      }
+    },
+    {
+      "code": "MF1",
+      "type": "main_field",
+      "dimensions_m": {
+        "width": 22,
+        "length": 11
+      },
+      "pixel_rect": {
+        "x": 1498,
+        "y": 68,
+        "width": 363,
+        "height": 159
+      },
+      "normalized_rect": {
+        "x": 0.768994,
+        "y": 0.081928,
+        "width": 0.186345,
+        "height": 0.191566
+      }
+    }
+  ],
+  "landmarks": {
+    "soccer_pitch_pixel_rect": {
+      "x": 1132,
+      "y": 81,
+      "width": 295,
+      "height": 144
+    },
+    "stairs_pixel_rect": {
+      "x": 891,
+      "y": 316,
+      "width": 55,
+      "height": 96
+    },
+    "note": "Landmarks are reference-only and are not planting zones."
+  }
+}
