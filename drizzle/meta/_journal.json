@@ -22,6 +22,13 @@
       "when": 1788521580000,
       "tag": "0002_crop_knowledge_foundation",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1788521581000,
+      "tag": "0003_sidi_bettach_agronomy_baseline",
+      "breakpoints": true
     }
   ]
 }
